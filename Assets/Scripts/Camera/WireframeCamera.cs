@@ -17,7 +17,7 @@ public class WireframeCamera : MonoBehaviour {
 	// Called right before the shader renders.
 	void OnPreRender () {
         Shader.SetGlobalColor("_LineColor", wireColor);
-        Shader.SetGlobalColor("_GridColor", Color.black);
+        Shader.SetGlobalColor("_GridColor", camera.backgroundColor);
         Shader.SetGlobalFloat("_LineWidth", wireWidth);
     }
 }

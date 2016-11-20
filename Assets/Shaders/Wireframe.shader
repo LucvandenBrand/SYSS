@@ -12,6 +12,7 @@
 		Pass
 		{
 			Blend SrcAlpha OneMinusSrcAlpha
+			Cull back
 			
 			CGPROGRAM
 			#pragma vertex vert
