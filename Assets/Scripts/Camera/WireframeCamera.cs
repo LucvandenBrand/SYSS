@@ -7,15 +7,17 @@ using UnityEngine;
 public class WireframeCamera : MonoBehaviour {
     public float wireWidth = 0.1f;
     public Color wireColor = Color.white;
+    private new Camera camera;
 
 	void Start () {
-        Camera camera = GetComponent<Camera>();
+        this.camera = GetComponent<Camera>();
         camera.SetReplacementShader(Shader.Find("Custom/Wireframe"), null);
     }
 	
 	// Called right before the shader renders.
 	void OnPreRender () {
         Shader.SetGlobalColor("_LineColor", wireColor);
+        Shader.SetGlobalColor("_GridColor", camera.backgroundColor);
         Shader.SetGlobalFloat("_LineWidth", wireWidth);
     }
 }

@@ -12,6 +12,7 @@
 		Pass
 		{
 			Blend SrcAlpha OneMinusSrcAlpha
+			Cull back
 			
 			CGPROGRAM
 			#pragma vertex vert
@@ -55,6 +56,8 @@
 					return _LineColor;
 				else if (uv.y > 1 - _LineWidth)             // 0,1 to 1,1
 					return _LineColor;
+				else if(d < _LineWidth && d > -_LineWidth) // 0,0 to 1,1
+                    return _LineColor;
 				else
 					return _GridColor;
 			}
