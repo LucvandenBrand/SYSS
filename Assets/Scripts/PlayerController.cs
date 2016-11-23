@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
 
-    public string MoveKeysName;
+    public string moveKeysName;
     public string rotateKeysName;
     public float moveSpeed;
     public float rotationSpeed;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     /*Manages the forward and backward movement*/
     private void MoveAction()
     {
-        float moveVertical = Input.GetAxis(MoveKeysName);
+        float moveVertical = Input.GetAxis(moveKeysName);
 
         Vector3 movement = new Vector3(0.0f, 0.0f, moveVertical * moveSpeed * Time.deltaTime);
         rb.AddRelativeForce(movement);
