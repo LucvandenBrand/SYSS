@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class TankController : MonoBehaviour {
     public string horizontalMoveName;
     public string verticalMoveName;
     public float wheelPower;
+    public float brakePower;
     public List<WheelCollider> rightTrack;
     public List<WheelCollider> leftTrack;
 	
@@ -18,12 +20,14 @@ public class TankController : MonoBehaviour {
         float rightTrackThrottle = -horizontalMove;
         rightTrackThrottle += verticalMove;
         if (rightTrackThrottle > 1) rightTrackThrottle = 1;
-        Debug.Log("rightTrackThrottle: " + rightTrackThrottle);
+        if (rightTrackThrottle < -11) rightTrackThrottle = -1;
+        //Debug.Log("rightTrackThrottle: " + rightTrackThrottle);
 
         float leftTrackThrottle = horizontalMove;
         leftTrackThrottle += verticalMove;
         if (leftTrackThrottle > 1) leftTrackThrottle = 1;
-        Debug.Log("leftTrackThrottle: " + leftTrackThrottle);
+        if (leftTrackThrottle < -1) leftTrackThrottle = -1;
+        //Debug.Log("leftTrackThrottle: " + leftTrackThrottle);
 
         moveTrack(rightTrack, rightTrackThrottle * wheelPower * Time.deltaTime);
         moveTrack(leftTrack, leftTrackThrottle * wheelPower * Time.deltaTime);
@@ -33,7 +37,19 @@ public class TankController : MonoBehaviour {
     {
         foreach (WheelCollider wheel in wheelList)
         {
-            wheel.motorTorque = power;
+            //check if direction reversed, and therefore has to break or power.
+            if (Math.Abs(wheel.rpm) < 1 || (Math.Sign(wheel.rpm) == Math.Sign(power)))
+            {
+                wheel.brakeTorque = 0;
+                wheel.motorTorque = power;
+                //Debug.Log("POWERRR " + wheel.motorTorque + " " + wheel.brakeTorque);
+            }
+            else
+            {
+                wheel.motorTorque = 0;
+                wheel.brakeTorque = brakePower * Time.deltaTime;
+                //Debug.Log("BRAKKKEEE " + wheel.motorTorque + " " + wheel.brakeTorque);
+            }
         }
     }
 }
