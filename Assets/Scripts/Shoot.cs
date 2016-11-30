@@ -15,7 +15,7 @@ public class Shoot : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey(KeyCode.Space)) 
         {
-            GameObject curBullit = Instantiate(bullet, ownTf.position + (ownTf.forward), transform.rotation);
+            GameObject curBullit = (GameObject) Instantiate(bullet, ownTf.position + (ownTf.forward), transform.rotation);
             /*Transform tf = curBullit.GetComponent<Transform>();
             tf.rotation = ownTf.rotation;
             tf.position = ownTf.position;*/
