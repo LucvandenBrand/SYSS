@@ -7,7 +7,6 @@ public class Television : MonoBehaviour {
 	private RenderTexture cam1Texture, cam2Texture;
 	public int resolutionX = 1920; // The resolution width of the tv in pixels.
     public int resolutionY = 1080; // The resolution height of the tv in pixels.
-    public float curve = 0.1f; // The curvature of the screen.
 	public Camera camera1;
 	public Camera camera2;
 	
