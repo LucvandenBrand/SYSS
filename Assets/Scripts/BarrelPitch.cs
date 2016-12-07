@@ -8,10 +8,17 @@ public class BarrelPitch : MonoBehaviour {
     private HingeJoint hingeJoint;
 
     void Start () {
-        hingeJoint = this.GetComponent<HingeJoint>();
-	}
+        hingeJoint = GetComponent<HingeJoint>();
+        JointMotor motor = hingeJoint.motor;
+        motor.force = 100;
+        motor.targetVelocity = 90;
+        motor.freeSpin = false;
+        hingeJoint.motor = motor;
+        hingeJoint.useMotor = true;
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        //hingeJoint.motor.force
 	}
 }
