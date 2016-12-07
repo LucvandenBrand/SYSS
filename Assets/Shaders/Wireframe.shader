@@ -31,6 +31,7 @@
 			};
 
 			struct v2f {
+				float4 scale : TEXCOORD1;
 				float4 pos : POSITION;
 				float4 texcoord1 : TEXCOORD0;
 				float4 color : COLOR;
@@ -41,11 +42,13 @@
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.texcoord1 = v.texcoord1;
 				o.color = v.color;
+				o.scale = v.vertex;
 				return o;
 			}
 
 			float4 frag(v2f i) : COLOR
 			{
+				//_LineWidth /= i.scale.x;
 				float2 uv = i.texcoord1;
 				float d = uv.x - uv.y;
 				if (uv.x < _LineWidth)                     // 0,0 to 1,0
