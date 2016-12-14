@@ -6,7 +6,7 @@ public class TurretRotation : MonoBehaviour {
     public Transform CameraHolderHorizontal;
     public float maxDegreesPerSecond;
 
-    void FixedUpdate()
+    void Update()
     {
         float current = transform.rotation.eulerAngles.y;
         float target = CameraHolderHorizontal.rotation.eulerAngles.y;
