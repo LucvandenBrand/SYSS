@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour {
     public GameObject bullet;
-    private Transform ownTf;
+    public float shootPower;
+    public string rTriggerName;
 
-    void Start()
-    {
-        ownTf = GetComponent<Transform>();
-    }
-	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(KeyCode.Space)) 
+        float rTriggerValue = Input.GetAxis(rTriggerName);
+        //Debug.Log("Rtrigger value " + rTriggerValue);
+        if (rTriggerValue > 0.50) 
         {
-            GameObject curBullit = (GameObject) Instantiate(bullet, ownTf.position + (ownTf.forward), transform.rotation);
+            GameObject curBullit = (GameObject) Instantiate(bullet, transform.position + (transform.up), transform.rotation);
             /*Transform tf = curBullit.GetComponent<Transform>();
             tf.rotation = ownTf.rotation;
             tf.position = ownTf.position;*/
             Rigidbody rb = curBullit.GetComponent<Rigidbody>();
-            rb.AddRelativeForce(new Vector3(0, 0, 150));
+            rb.AddRelativeForce(new Vector3(0, shootPower, 0));
         }
 	}
 }
